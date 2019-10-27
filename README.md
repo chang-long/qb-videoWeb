@@ -1,12 +1,15 @@
 # qb-videoWeb
 qbenben-NodeJS+VueJS全栈项目—QBen视频网站
 
-## 服务端(管理端)
+---
+包管理器：yarn
+
+## 服务端(管理端) 【server/apps/admin】
 ### 技术栈：NodeJS的Nest.js框架+MongoDB
 
 - 大部分的都是增删改查的接口 
 
-## 服务端(客户端)
+## 服务端(客户端) 【server/apps/server】
 ### 技术栈：NodeJS的Nest.js框架+MongoDB
 
 - 大部分的都是查询的接口 
