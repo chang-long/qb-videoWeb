@@ -23,6 +23,10 @@
     "@nestjs/common": "^6.7.2",
     "@nestjs/core": "^6.7.2",
     "@nestjs/platform-express": "^6.7.2",
+    "@typegoose/typegoose": "^6.1.5",
+    "@types/mongoose": "^5.5.32",
+    "mongoose": "^5.7.12",
+    "nestjs-typegoose": "^7.0.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.0",
     "rxjs": "^6.5.3"
@@ -59,7 +63,11 @@
     "coverageDirectory": "./coverage",
     "testEnvironment": "node",
     "roots": [
-      "<rootDir>/apps/"
-    ]
+      "<rootDir>/apps/",
+      "<rootDir>/libs/"
+    ],
+    "moduleNameMapper": {
+      "@libs/db/(.*)": "<rootDir>/libs/db/src/$1"
+    }
   }
 }
