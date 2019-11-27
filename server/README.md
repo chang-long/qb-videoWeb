@@ -21,55 +21,41 @@
   <a href="https://paypal.me/kamilmysliwiec"><img src="https://img.shields.io/badge/Donate-PayPal-dc3d53.svg"/></a>
   <a href="https://twitter.com/nestframework"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
 </p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+ 
+##  启动项目(管理模块)：
+<code>nest start -w admin</code><br>
 
-## Description
+##  DB库的初始化
+* 我们admin和server模块虽然在接口方面是独立的，互不干扰的，但是他们也有共用的地方(库)，<code>nest g lib db</code>，这样的话我们在数据库中的模型就可以在库中写好，一旦接口方面需要使用，我们可以直接在<code>app.module.ts</code>引用过去
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+##  连接DB数据库
 
-## Installation
+<code>yarn add nestjs-typegoose @typegoose/typegoose mongoose @types/mongoose</code><br>
 
-```bash
-$ npm install
-```
+* 在/libs/db/src/db.module.ts中使用forRoot方法引入数据库，并且传入连接对象
 
-## Running the app
+##  创建数据模型
 
-```bash
-# development
-$ npm run start
+* 在libs/db/src中创建一个models文件夹用来存放我们的数据库模型
 
-# watch mode
-$ npm run start:dev
+##  引用数据模型(全局引用)
 
-# production mode
-$ npm run start:prod
-```
+* 在db.module.ts将Module标记为全局的(@Global())，然后使用forFeature方法将模型引用进来，然后把模型导入进来，再导出这些模型。
 
-## Test
+##  添加模型模块
 
-```bash
-# unit tests
-$ npm run test
+<code>nest g mo -p admin users</code></br>
+<code>nest g co -p admin users</code></br>
 
-# e2e tests
-$ npm run test:e2e
+* 相当于在admin这个模块添加一个users子模块
 
-# test coverage
-$ npm run test:cov
-```
+## 使用Crud快速实现增删改查接口
 
-## Support
+<code>yarn add nestjs-mongoose-crud</code><br>
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+* 在\server\apps\admin\src\users\users.controller.ts中使用(constructor @InjectModel)将user模型注入进来
+* 使用@Crud将model传入
 
-## Stay in touch
+##  使用Swagger编写接口文档
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-  Nest is [MIT licensed](LICENSE).
+<code>yarn add @nestjs/swagger swagger-ui-express</code><br>

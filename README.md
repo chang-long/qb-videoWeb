@@ -1,7 +1,5 @@
-# qb-videoWeb
-qbenben-NodeJS+VueJS全栈项目—QBen视频网站
-
----
+# qb-videoWeb 🎞
+qbenben-NodeJS+VueJS全栈项目—QBen视频网站<br>
 包管理器：yarn
 
 ## 服务端(管理端) 【server/apps/admin】
