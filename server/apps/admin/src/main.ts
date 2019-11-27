@@ -6,7 +6,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const options = new DocumentBuilder()
-    .setTitle('Qbenben视频全栈网站-后天管理API')
+    .setTitle('Qbenben视频全栈网站-后台管理API')
     .setDescription('供后台管理界面调用的服务端')
     .setVersion('1.0')
     .build();
