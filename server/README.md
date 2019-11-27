@@ -34,22 +34,23 @@
 
 * 在/libs/db/src/db.module.ts中使用forRoot方法引入数据库，并且传入连接对象
 
-##  创建数据模型
+##  创建数据模型(user.module.ts)
 
 * 在libs/db/src中创建一个models文件夹用来存放我们的数据库模型
 
 ##  引用数据模型(全局引用)
 
 * 在db.module.ts将Module标记为全局的(@Global())，然后使用forFeature方法将模型引用进来，然后把模型导入进来，再导出这些模型。
+* 在需要引用模型的地方(app.module.ts)中引入
 
-##  添加模型模块
+##  添加模型模块(users)
 
 <code>nest g mo -p admin users</code></br>
 <code>nest g co -p admin users</code></br>
 
 * 相当于在admin这个模块添加一个users子模块
 
-## 使用Crud快速实现增删改查接口
+## 使用@Crud快速实现增删改查接口
 
 <code>yarn add nestjs-mongoose-crud</code><br>
 
@@ -75,4 +76,22 @@
 ```
 
 <img src="https://qbenben-1259133534.cos.ap-shenzhen-fsi.myqcloud.com/uploads/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20191127214053.png" width="60%">
+
+
+##  建立课程和课时模型之间的关系，类似为B站上的一个视频对应多个分集(course.module.ts && episode.model.ts)
+
+* 在命名上我们习惯上把模型定义为单数并且定义一些模型的属性。而在操作这些模型的模块和控制器上我们习惯性定义为复数，可以认为是对于模型上的一些管理
+* 其实@prop()是属性最重要的标识，一旦打上才能作为数据库的字段
+* 课程和课时都是独立的模型，使用课时的id对课程进行关联，存放这些id是一个数组字段，定义的时候就不能用@prop()，应该使用<b>@arrayProp()</b>标识数组字段。
+* 存放episodes这个字段的时候使用Ref表示引入了“参考”，Ref是一个泛型，我们应该定义为<code>Episode</code>这个数组模型。
+* 使用@arrayProp()传入{itemRef: 'Episode'},表示里面的每一个元素参考的哪一个。这样就可以用<code>episodes</code>将课程和课时关联起来
+
+##  添加课程模型模块以及课时模型模块(courses && episodes)
+
+<code>nest g mo -p admin courses</code></br>
+<code>nest g co -p admin courses</code></br>
+<code>nest g mo -p admin episodes</code></br>
+<code>nest g co -p admin episodes</code></br>
+
+* 与user一样使用@Crud快速生成增删改查以及@InjectModel注入模型
 
