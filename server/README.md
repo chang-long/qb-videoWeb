@@ -59,3 +59,20 @@
 ##  使用Swagger编写接口文档
 
 <code>yarn add @nestjs/swagger swagger-ui-express</code><br>
+[文档中](https://docs.nestjs.com/recipes/swagger)OpenAPI (Swagger)接口文档的编写；
+
+* 更改接口名，一般来说接口文档的命名为(api-docs) 
+* 建议给每个模型模块增加Tag分组<code>@ApiUseTag('xxx')</code>
+* 给每个模型使用@ApiModelProperty()模型属性的简介，方便阅读属性的作用。description:表示描述，example默认值。
+* 在模型上定义@modelOptions可以指定一些其他属性(比如时间，toJson)
+
+```TypeScript
+@modelOptions({
+  schemaOptions: {
+    timestamps: true
+  }
+})
+```
+
+<img src="https://qbenben-1259133534.cos.ap-shenzhen-fsi.myqcloud.com/uploads/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20191127214053.png" width="60%">
+
