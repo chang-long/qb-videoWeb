@@ -75,8 +75,9 @@
 })
 ```
 
-<img src="https://qbenben-1259133534.cos.ap-shenzhen-fsi.myqcloud.com/uploads/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20191127214053.png" width="60%">
-
+<p align="center">
+  <a href="http://nestjs.com/" target="blank"><img src="https://qbenben-1259133534.cos.ap-shenzhen-fsi.myqcloud.com/uploads/swagger.png" width="90%" alt="QbenbenSwaggerUI页面" /></a>
+</p>
 
 ##  建立课程和课时模型之间的关系，类似为B站上的一个视频对应多个分集(course.module.ts && episode.model.ts)
 
