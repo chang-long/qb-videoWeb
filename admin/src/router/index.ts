@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import Home from '../views/Home.vue'
 import Main from '../views/Main.vue'
+import CourseList from '../views/courses/CourseList.vue'
+
 
 Vue.use(VueRouter)
 
@@ -14,7 +16,12 @@ const routes: RouteConfig[] = [
         name: 'home',
         path: '/',
         component: Home
-      }
+      },
+      {
+        name: 'courses-list',
+        path: '/courses/list',
+        component: CourseList
+      },
     ]
   },
 
