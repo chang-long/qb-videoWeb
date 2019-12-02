@@ -96,3 +96,7 @@
 
 * 与user一样使用@Crud快速生成增删改查以及@InjectModel注入模型
 
+##  解决跨域
+
+* 在main.ts中假如<code>app.enableCors()</code>就可以了
+
