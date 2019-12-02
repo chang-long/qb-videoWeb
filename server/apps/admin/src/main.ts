@@ -4,7 +4,7 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-
+  app.enableCors();
   const options = new DocumentBuilder()
     .setTitle('Qbenben视频全栈网站-后台管理API')
     .setDescription('供后台管理界面调用的服务端')
