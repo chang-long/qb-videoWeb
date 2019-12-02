@@ -98,5 +98,5 @@
 
 ##  解决跨域
 
-* 在main.ts中假如<code>app.enableCors()</code>就可以了
+* 在main.ts中加入<code>app.enableCors()</code>
 
