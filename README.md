@@ -24,6 +24,9 @@ qbenben-NodeJS+VueJS全栈项目—QBen视频网站<br>
 
 ## 前台界面(管理端) 【admin】
 ### 技术栈：VueJS(TypeScript)框架 + ElementUI
+- 启动:<br>
+<code>cd admin</code><br>
+<code>yarn serve</code><br>
 
 - 使用<b>vue-class-component</b>基于类的Vue组件
 
