@@ -8,7 +8,15 @@
         :key="name"
         :label="field.label"
         :width="field.width"
-      ></el-table-column>
+      >
+      </el-table-column>
+      <el-table-column
+        label="操作"
+        :width="200">
+        <template v-slot="{row}">
+          <el-button type="success" size="mini" @click="$router.push(`/courses/edit/${row._id}`)">编辑</el-button>
+        </template>
+      </el-table-column>
     </el-table>
   </div>
 </template>
