@@ -17,9 +17,11 @@
       </el-menu>
     </el-aside>
     <el-container>
-      <el-header>Qbenben视频中心 - 后台管理界面</el-header>
+      <el-header >
+        <h3>Qbenben视频中心 - 后台管理界面</h3>
+      </el-header>
       <el-main>
-        <router-view></router-view>
+        <router-view :key="$route.path"></router-view>
       </el-main>
     </el-container>
   </el-container>
