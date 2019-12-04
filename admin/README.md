@@ -46,13 +46,13 @@ yarn add axios @types/axios
 
 ##  创建类型定义文件
 
-* 创建一个什么什么.d文件代表Vue中的类型定义文件
+* 创建一个什么什么.d文件代表Vue中的类型定义文件(http-vue.d.ts)
 * 如axios存储baseuUrl的变量(本项目使用的是$http),其实他对于编译没有作用，只是为了给我们的编辑器使用
 * 作用：明确知道($http)是什么，在这里是axios的实例，并且也有很好的代码提示
 
 ##  编辑、创建页面
 * 首先是路由(router/index.ts)中使用<code>:id</code>并且设置<code>props: true</code>允许传递参数
-* 在页面中(CourseEdit.vue)中使用<code>@Prop(String) id: string</code>使用id值接收路由参数
+* 在页面中(CourseEdit.vue)中使用<code>@Prop(String) id!: string</code>使用id值接收路由参数，这里感叹号的意思是：跟编译器说明id我们会给他赋值
 * 由于我们编辑和创建都使用了一个组件，我们切换的时候有可能导致他不会更新，所以我们要在(Main.vue)中的<code>router-view</code>中加入一个key，这里使用路由地址不同来更新组件。<code>:key="$route.path"</code>，保证唯一键，避免数据重复导致不更新
 * 由于创建和编辑页面的区别在于有没有传递ID过来。以前我们是在计算属性中判断，如今使用基于类的组件方式一些不同，现在需要写成一个方法，并且在前面加上关键字<b>get</b>表示这个方法的返回值为当成属性。<br>
 
@@ -65,6 +65,17 @@ yarn add axios @types/axios
 * 最后使用这个属性来判断是否为编辑还是创建页面
 
 
-##  动态生成表单(vue-ele-form)
+##  动态生成表单(vue-ele-form)插件的基本使用
+
+```bash
+cd admin
+yarn add vue-ele-form
+```
+
+* 在main.ts中全局注册
+* 需要创建一个ts的声明文件(packages.d.ts)，导出返回一个any值就不会报错了
+* form-data表示表单的数据，form-desc表示表单的描述，request-fn表示表单提交的钩子函数
+* 在方法中我们需要使用动态的方式去判断是否为创建还是编辑。url和method到需要写成动态的方法(使用isNew这个属性来判断)
+* 需要注意动态判断方法时获取对象某一个方法应该使用[]而不是.
 
 
