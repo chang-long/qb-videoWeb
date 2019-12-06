@@ -78,6 +78,8 @@ yarn add vue-ele-form
 * 在方法中我们需要使用动态的方式去判断是否为创建还是编辑。url和method到需要写成动态的方法(使用isNew这个属性来判断)
 * 需要注意动态判断方法时获取对象某一个方法应该使用[]而不是.
 
-##  使用(Avue)插件改造常见表格的CRUD
+##  使用(Avue)插件改造常见表格的CRUD(CourseCrud)
+* 安装<code>yarn add @smallwei/avue</code>
+* 然后此时之前创建的CourseEdit，CourseList和vue-ele-form就都注释掉，不使用。都改成使用avue去创建动态表单和列表
 
 
