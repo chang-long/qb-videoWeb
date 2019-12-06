@@ -69,9 +69,6 @@
    /**
      * @description: 编辑数据，Avue的编辑表单行数据的钩子函数
      * @param {obj} row 行数据对象
-     * @param {number} index 行数据对象
-     * @param {function} done 自动加载动画以及关闭遮罩的函数
-     * @param {function} loading  手动加载动画以及关闭遮罩的函数
      * @return: void
      */
     async remove(row) {
