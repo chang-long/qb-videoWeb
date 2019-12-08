@@ -82,4 +82,9 @@ yarn add vue-ele-form
 * 安装<code>yarn add @smallwei/avue</code>
 * 然后此时之前创建的CourseEdit，CourseList和vue-ele-form就都注释掉，不使用。都改成使用avue去创建动态表单和列表
 
-##  使用(Avue)插件并配合服务端二次封装一个任意资源通用的CRUD组件
+##  使用(Avue)插件并配合服务端二次封装一个任意资源通用的CRUD组件(ResourceCrud)
+* 把管理名，行列名等信息从服务端(courses.controller.ts)获取，这样以后的扩展性就变强了
+* 然后在(CoursesCrud.vue)将接口所使用的('courses')转化为变量的方式。通过转入url中参数获取达到转化的目的。提高拓展性。
+* (router/index.ts)<code>path: '/:resourse/list'</code>将reourse作为参数传入组件中。组件接收参数后动态请求接口达到拓展的效果。
+* 最后将组件变成通用化(ResourceCrud.vue)修改相关对于文件的引用
+* 重复以上操作将(episodes.controller.ts和users.controller.ts)添加option接口后。全部使用ResourceCrud组件快速生成课时管理和用户管理
