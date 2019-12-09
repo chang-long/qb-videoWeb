@@ -2,11 +2,13 @@
   <div>
     <avue-crud
       v-if="option.column"
+      :page="page"
       :data="data.data"
       :option="option"
       @row-save="create"
       @row-update="updata"
       @row-del="remove"
+      @on-load="changePage"
     ></avue-crud>
   </div>
 </template>
@@ -16,9 +18,16 @@ import { Vue, Component, Prop } from "vue-property-decorator";
 @Component({})
 export default class ResourceList extends Vue {
   @Prop(String) resource: string
-
-  data = {};
-  option = {};
+  data: any = {};
+  option: any = {};
+  page: any = {
+    // pageSize: 2,
+    // pageSizes: [2, 5, 10],
+    total: 0,
+  };
+  query: any = {
+    limit: 10
+  }
 
   created() {
     this.fetchOption();
@@ -29,17 +38,33 @@ export default class ResourceList extends Vue {
    * @description: 获取表单配置数据
    * @return: option
    */
-
   async fetchOption() {
     const res = await this.$http.get(`${this.resource}/option`);
     this.option = res.data;
   }
+
+  /**
+   * @description: 切换分页设置时触发的钩子函数
+   * @param {obj} page 分页器配置对象
+   * @return: data 表格数据
+   */
+  async changePage({pageSize, currentPage}){
+    this.query.page = currentPage;
+    this.query.limit = pageSize;
+    this.fetch();
+  }
+
   /**
    * @description: 获取表单数据
    * @return: data
    */
   async fetch() {
-    const res = await this.$http.get(`${this.resource}`);
+    const res = await this.$http.get(`${this.resource}`, {
+      params: {
+        query: this.query,
+      }
+    });
+    this.page.total = res.data.total;
     this.data = res.data;
   }
 
