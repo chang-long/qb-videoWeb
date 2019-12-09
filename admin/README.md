@@ -88,3 +88,8 @@ yarn add vue-ele-form
 * (router/index.ts)<code>path: '/:resourse/list'</code>将reourse作为参数传入组件中。组件接收参数后动态请求接口达到拓展的效果。
 * 最后将组件变成通用化(ResourceCrud.vue)修改相关对于文件的引用
 * 重复以上操作将(episodes.controller.ts和users.controller.ts)添加option接口后。全部使用ResourceCrud组件快速生成课时管理和用户管理
+
+##  使用（Avue）实现数据分页
+* 定义一个query对象作为请求的参数，因为axios做好了封装使用params传入的参数如果为对象则自动转换为JSON形式的字符串
+* 重写fetch获取数据接口并且配合点击分页时候的钩子函数达到分页的功能
+
