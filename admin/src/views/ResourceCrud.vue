@@ -10,6 +10,7 @@
       @row-del="remove"
       @on-load="changePage"
       @sort-change="changSort"
+      @search-change="search"
     ></avue-crud>
   </div>
 </template>
@@ -60,15 +61,31 @@ export default class ResourceList extends Vue {
    * @param {obj} 列数据以及排序状态(order)的对象
    * @return: data
    */
-
   async changSort({ prop, order }) {
     if (!order) {
       this.query.sort = null;
-    }else{
+    } else {
       this.query.sort = {
-        [prop]: order === 'ascending' ? 1 : -1,
+        [prop]: order === "ascending" ? 1 : -1
+      };
+    }
+    this.fetch();
+  }
+
+  /**
+   * @description: 搜索的钩子函数
+   * @param {obj} 列名以及搜索栏中数据，键值对的对象
+   * @return: data
+   */
+  async search(where) {
+    //如果该列名在服务端传回中标识了允许使用模糊查询，则该搜索变为模糊查询
+    for (let k in where) {
+      const field = this.option.column.find(v => v.prop === k);
+      if (field.regex) {
+        where[k] = { $regex: where[k] };
       }
     }
+    this.query.where = where;
     this.fetch();
   }
 
