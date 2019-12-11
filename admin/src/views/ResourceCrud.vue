@@ -9,6 +9,7 @@
       @row-update="updata"
       @row-del="remove"
       @on-load="changePage"
+      @sort-change="changSort"
     ></avue-crud>
   </div>
 </template>
@@ -17,17 +18,17 @@
 import { Vue, Component, Prop } from "vue-property-decorator";
 @Component({})
 export default class ResourceList extends Vue {
-  @Prop(String) resource: string
+  @Prop(String) resource: string;
   data: any = {};
   option: any = {};
   page: any = {
     // pageSize: 2,
     // pageSizes: [2, 5, 10],
-    total: 0,
+    total: 0
   };
   query: any = {
     limit: 10
-  }
+  };
 
   created() {
     this.fetchOption();
@@ -48,9 +49,26 @@ export default class ResourceList extends Vue {
    * @param {obj} page 分页器配置对象
    * @return: data 表格数据
    */
-  async changePage({pageSize, currentPage}){
+  async changePage({ pageSize, currentPage }) {
     this.query.page = currentPage;
     this.query.limit = pageSize;
+    this.fetch();
+  }
+
+  /**
+   * @description: 点击排序箭头触发的钩子函数
+   * @param {obj} 列数据以及排序状态(order)的对象
+   * @return: data
+   */
+
+  async changSort({ prop, order }) {
+    if (!order) {
+      this.query.sort = null;
+    }else{
+      this.query.sort = {
+        [prop]: order === 'ascending' ? 1 : -1,
+      }
+    }
     this.fetch();
   }
 
@@ -61,7 +79,7 @@ export default class ResourceList extends Vue {
   async fetch() {
     const res = await this.$http.get(`${this.resource}`, {
       params: {
-        query: this.query,
+        query: this.query
       }
     });
     this.page.total = res.data.total;
