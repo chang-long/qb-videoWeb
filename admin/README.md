@@ -97,3 +97,12 @@ yarn add vue-ele-form
 * 在获取列名数据的时候后端传递<code>sortable: true</code>后前台界面列名就会出现排序箭头
 * 使用钩子函数(@sort-change)，改写query对象作为请求的参数，获取数据
 
+##  使用（Avue）实现搜索
+* 在获取列名数据的时候后端传递<code>search: true</code>后前台界面列名就会出现排序箭头
+* 使用钩子函数(@search-change)，改写query对象作为请求的参数，获取数据
+* 因为在Avue中没有对模糊查询相关匹配，所以实现模糊查询的时候，我们可以自己定义一个regex字段表示我们使用模糊查询，然后自己操作。
+
+##  使用(Avue)实现上传图片
+* 首先在服务端获取表格头(列)数据时候，应该传递<code>type: 'upload', listType: 'picture-img'</code>表示该字段列为上传，在表格中显示为图片
+* 在Avue中上传使用的axios需要全局定义如：window.axios作上传请求对象。同时还可以使用另一个对象Vue.prototype.$httpajax，在作上传
+

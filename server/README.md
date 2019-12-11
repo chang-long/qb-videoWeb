@@ -103,7 +103,18 @@
 ##  (get接口)传入JSON对象实现数据分页，条件查询，数据模糊查询等等
 * <code>"limit": x</code>限制传给前端多少条数据
 * <code>"page": x</code>配合limit展示多少条给前端
-* <code>"sort": {"关键字段，一般为_id": -1}</code>排序，1表示升序，-1表示降序。在传递给前端的数据中加入<code>sortable: true</code>
-* <code>"where": {"关键字段": astring}</code>条件查询
-* <code>"where": {"关键字段": {"$regex": "x"}}</code>模糊查询
+* <code>"sort": {"关键字段，一般为_id": -1}</code>排序，1表示升序，-1表示降序。因为我们在前台使用服务器的数据渲染表格在传递给前端的数据中加入<code>sortable: true</code>
+* <code>"where": {"关键字段": astring}</code>条件查询，因为我们在前台使用服务器的数据渲染表格，<code>search: true</code>
+* <code>"where": {"关键字段": {"$regex": "x"}}</code>，模糊查询因为我们在前台使用服务器的数据渲染表格，虽然Avue中没有模糊查询相关的字段匹配，我们可以自己定义一个，比如<code>regex: true</code>
+
+##  上传接口
+* 如果上传接口在每个模型的调用各自逻辑不同可以再各自的controller中书写不同逻辑
+* 本案例中上传接口都没有不同就在(app.controller.ts)中
+* @UseInterceptors()  拦截器
+* @UploadedFile() 上传文件的装饰器
+* nest自带模块MulterModule,将文件传递到哪里保存(app.module.ts)
+
+##  静态文件托管(server\apps\admin\src\main.ts)
+* 由于nest底层是可以支持express的。所以说这种存储是基于什么框架。在app定义的时候可以明确指定(使用泛型)我们现在使用的框架<code><NestEpressApplication></code>表示我们的这个app是基于Express的应用
+* 使用app.useStaticAssets传入静态文件的地址，以及文件的前缀。
 
