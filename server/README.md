@@ -103,7 +103,7 @@
 ##  (get接口)传入JSON对象实现数据分页，条件查询，数据模糊查询等等
 * <code>"limit": x</code>限制传给前端多少条数据
 * <code>"page": x</code>配合limit展示多少条给前端
-* <code>"sort": {"关键字段，一般为_id": -1}</code>排序，1表示升序，-1表示降序
+* <code>"sort": {"关键字段，一般为_id": -1}</code>排序，1表示升序，-1表示降序。在传递给前端的数据中加入<code>sortable: true</code>
 * <code>"where": {"关键字段": astring}</code>条件查询
 * <code>"where": {"关键字段": {"$regex": "x"}}</code>模糊查询
 

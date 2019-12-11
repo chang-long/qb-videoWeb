@@ -93,3 +93,7 @@ yarn add vue-ele-form
 * 定义一个query对象作为请求的参数，因为axios做好了封装使用params传入的参数如果为对象则自动转换为JSON形式的字符串
 * 重写fetch获取数据接口并且配合点击分页时候的钩子函数达到分页的功能
 
+##  使用（Avue）实现排序
+* 在获取列名数据的时候后端传递<code>sortable: true</code>后前台界面列名就会出现排序箭头
+* 使用钩子函数(@sort-change)，改写query对象作为请求的参数，获取数据
+
