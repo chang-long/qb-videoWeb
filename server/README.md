@@ -118,3 +118,5 @@
 * 由于nest底层是可以支持express的。所以说这种存储是基于什么框架。在app定义的时候可以明确指定(使用泛型)我们现在使用的框架<code><NestEpressApplication></code>表示我们的这个app是基于Express的应用
 * 使用app.useStaticAssets传入静态文件的地址，以及文件的前缀。
 
+##  阿里云OSS文件上传
+
