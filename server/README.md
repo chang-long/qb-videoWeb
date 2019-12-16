@@ -118,5 +118,12 @@
 * 由于nest底层是可以支持express的。所以说这种存储是基于什么框架。在app定义的时候可以明确指定(使用泛型)我们现在使用的框架<code><NestEpressApplication></code>表示我们的这个app是基于Express的应用
 * 使用app.useStaticAssets传入静态文件的地址，以及文件的前缀。
 
-##  阿里云OSS文件上传
+##  阿里云OSS文件上传(multer-aliyun-oss)
+* 虽然前端使用Avue插件自带阿里OSS上传功能，可是把云存储的一些关键信息放在客户端中还是不安全(反编JS)。所以还是要在服务端完成
+* <code>yarn add multer-aliyun-oss</code> 
+* 配置：
+* 填写地域节点前缀：region: 'oss-cn-shenzhen' 
+* 	AccessKey ID	，AccessKeySecret都是在用户中的accesskeys中创建子用户后获取。注意子用户需要添加权限哦
+* 填写存储桶名：bucket: 'video-qbenben'
+* 现在就不会占用我们服务器的空间和流量。
 
