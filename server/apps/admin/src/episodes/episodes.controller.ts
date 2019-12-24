@@ -29,7 +29,7 @@ export class EpisodesController {
       column: [
         { prop: 'course', label: '所属课程', type: 'select', dicData: courses, row: true },
         { prop: 'name', label: '课时名称', span: 24 },
-        { prop: 'file', label: '视频文件', width: '120px', span: 24, listType: 'picture-img', type: 'upload', action: '/upload' },
+        { prop: 'file', label: '视频文件', width: '120px:arrow_up:	', span: 24, listType: 'picture-img', type: 'upload', action: '/upload' },
       ],
     };
   }
