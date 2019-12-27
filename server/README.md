@@ -132,3 +132,15 @@
 * 在(episodes.controller.ts)中添加服务端渲染下拉菜单的参数，其中下拉菜单的值也是需要从课程模型中获取。使用注入模型。同时在查找中转换对象格式再返回给下拉菜单。
 * 此时还是会出现前端传给后端$符号报错。解决的方案是在controller中加入translate: false,让前段接收后不传递。
 
+##  12-28更新依赖
+* 我们可以通过下面的命令行的方式查看哪些依赖需要更新
+* 值得注意的是一般版本号第一位是大版本号的更新这个需要看文档查看更新内容是不是破坏性兼容并且及时更新进行修改,本次修改的主要依赖是@nestjs/swagger
+
+```bash
+cd server
+yarn upgrade-interactive --latest
+```
+
+*  ApiModelProperty 改为：ApiProperty
+* ApiUseTags 改为：ApiTags
+
