@@ -144,3 +144,6 @@ yarn upgrade-interactive --latest
 *  ApiModelProperty 改为：ApiProperty
 * ApiUseTags 改为：ApiTags
 
+##  使用@nest:config加载环境变量
+* 假如我们两个项目使用同一个端口就会产生错误，其实当我们多人协同开发项目的话，像端口号，存储桶的测试密钥等信息，每个人都会有所不同，这个时候就要使用环境变量来进行配置，这样就不用更改项目中的信息，只需要更改想.env这样的环境变量配置文件。可是又要考虑别人在拉取代码后也要进行设置，所以我们env文件一般使用gitignore进行忽略，然后创建一个.env进行示例，这样拉取得手别人拉到是示例文件，就可以自行填写。
+
