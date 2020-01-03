@@ -147,3 +147,21 @@ yarn upgrade-interactive --latest
 ##  使用@nest:config加载环境变量
 * 假如我们两个项目使用同一个端口就会产生错误，其实当我们多人协同开发项目的话，像端口号，存储桶的测试密钥等信息，每个人都会有所不同，这个时候就要使用环境变量来进行配置，这样就不用更改项目中的信息，只需要更改想.env这样的环境变量配置文件。可是又要考虑别人在拉取代码后也要进行设置，所以我们env文件一般使用gitignore进行忽略，然后创建一个.env进行示例，这样拉取得手别人拉到是示例文件，就可以自行填写。
 
+* 安装依赖：<br>
+```bash
+cd server
+yarn add @nestjs/config
+nest g common
+```
+
+* 这样我们就得到了一个在libs下的文件夹common，这样我们就可以在这里面写一些两个子项目都会用到的代码（比如：加载环境变量）
+* (common.modules.ts)中使用 ConfigModule.forRoot传入isGlobal表示config在任意地方都可以使用，同时要加载DbModule数据库模块
+* 在数据库模块这里就可以使用环境变量加载数据库地址,在server文件夹下建立.env文件然后添加数据地址，admin和server 前台和后台使用到的后端端口号环境变量
+* 然后在server/.gitignore中忽略.env，再建立.env.example范例文件，为别人拉取代码后自行填写
+* 填写完后需要注意的是由于ConfigModule和DbModule都是并行加载的导致在加载DbModule时候ConfigModule并未读取完毕。所以nest模块当中都会有两个方法一个forRoot方法和forRootAsync异步加载
+* (db.modules.ts)使用forRootAsync异步加载时使用useFactory 工厂方法,返回数据库的连接配置
+* (server\apps\admin\src\app.module.ts)中将使用到的DbModule更换成CommonModule,并放到最上面先进行加载
+* 同时将(server\apps\admin\src\app.module.ts)OSS存储中关键的信息也使用环境变量的方式
+* 在每个子项目main.ts中将端口号进行更改
+
+
