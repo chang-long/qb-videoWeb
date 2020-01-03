@@ -13,7 +13,7 @@ import router from './router'
 Vue.config.productionTip = false
 
 const http = axios.create({
-  baseURL: 'http://localhost:3000'
+  baseURL: process.env.VUE_APP_API_URL
 })
 //使用了Avue的上传，Avue中的上传使用$httpajax作axios请求调用
 Vue.prototype.$httpajax = http;//

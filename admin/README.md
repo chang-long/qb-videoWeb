@@ -106,3 +106,7 @@ yarn add vue-ele-form
 * 首先在服务端获取表格头(列)数据时候，应该传递<code>type: 'upload', listType: 'picture-img'</code>表示该字段列为上传，在表格中显示为图片
 * 在Avue中上传使用的axios需要全局定义如：window.axios作上传请求对象。同时还可以使用另一个对象Vue.prototype.$httpajax，在作上传
 
+##  使用环境变量设置接口地址
+* 在nest中我们已经使用了环境变量来设置一些通用信息和私密信息，在这里Vue中也可以设置环境变量
+* 但在Vue中他忽略的则不是.env 文件而是.env.local 文件，需要注意的是Vue中的环境变量名前缀是VUE_APP_XXXX开头
+
