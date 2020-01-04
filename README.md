@@ -29,6 +29,14 @@ qbenben-NodeJS+VueJS全栈项目—QBen视频网站<br>
 <code>cd admin</code><br>
 <code>yarn serve</code><br>
 
+##  前台界面(客户端) 【web】
+### 技术栈：Nuxt.js - Vue.js 通用框架 + Vuetify
+- 采用服务端渲染(SSR)
+- 启动:<br>
+<code>cd web</code><br>
+<code>yarn serve</code><br>
+
+
 
 ---
 学习途径： [全栈之巅](https://www.bilibili.com/video/av73070499)
