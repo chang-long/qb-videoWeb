@@ -31,10 +31,11 @@ qbenben-NodeJS+VueJS全栈项目—QBen视频网站<br>
 
 ##  前台界面(客户端) 【web】
 ### 技术栈：Nuxt.js - Vue.js 通用框架 + Vuetify
-- 采用服务端渲染(SSR)
+- 采用服务端渲染(SSR),Nuxt其原理是本来是先渲染前端页面再请求接口的方式，变成了先请求接口再渲染前端页面，便于SEO。
+
 - 启动:<br>
 <code>cd web</code><br>
-<code>yarn serve</code><br>
+<code>yarn dev</code><br>
 
 
 
