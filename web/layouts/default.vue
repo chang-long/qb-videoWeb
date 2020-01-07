@@ -1,8 +1,14 @@
 <template>
   <v-app id="inspire">
+    <!-- 抽屉 -->
     <v-navigation-drawer v-model="drawer" app clipped>
       <v-list dense>
-        <v-list-item v-for="item in items" :key="item.text" link>
+        <v-list-item
+          :to="item.link"
+          v-for="item in items"
+          :key="item.text"
+          link
+        >
           <v-list-item-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-action>
@@ -10,9 +16,7 @@
             <v-list-item-title>{{ item.text }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-subheader class="mt-4 grey--text text--darken-1"
-          >SUBSCRIPTIONS</v-subheader
-        >
+        <v-subheader class="mt-4 grey--text text--darken-1">订阅</v-subheader>
         <v-list>
           <v-list-item v-for="item in items2" :key="item.text" link>
             <v-list-item-avatar>
@@ -44,18 +48,18 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-
+    <!-- 顶部 -->
     <v-app-bar app clipped-left color="red" dense>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-icon class="mx-4">fab fa-youtube</v-icon>
       <v-toolbar-title class="mr-12 align-center">
-        <span class="title">Youtube</span>
+        <span class="title">qbenben-视频网站</span>
       </v-toolbar-title>
       <v-spacer />
       <v-row align="center" style="max-width: 650px">
         <v-text-field
           :append-icon-cb="() => {}"
-          placeholder="Search..."
+          placeholder="搜索..."
           single-line
           append-icon="search"
           color="white"
@@ -63,36 +67,9 @@
         />
       </v-row>
     </v-app-bar>
-
+    <!-- 内容 -->
     <v-content>
-      <v-container class="fill-height">
-        <v-row justify="center" align="center">
-          <v-col class="shrink">
-            <v-tooltip right>
-              <template v-slot:activator="{ on }">
-                <v-btn :href="source" icon large target="_blank" v-on="on">
-                  <v-icon large>mdi-code-tags</v-icon>
-                </v-btn>
-              </template>
-              <span>Source</span>
-            </v-tooltip>
-            <v-tooltip right>
-              <template v-slot:activator="{ on }">
-                <v-btn
-                  icon
-                  large
-                  href="https://codepen.io/johnjleider/pen/aezMOO"
-                  target="_blank"
-                  v-on="on"
-                >
-                  <v-icon large>mdi-codepen</v-icon>
-                </v-btn>
-              </template>
-              <span>Codepen</span>
-            </v-tooltip>
-          </v-col>
-        </v-row>
-      </v-container>
+      <nuxt-child />
     </v-content>
   </v-app>
 </template>
@@ -105,11 +82,9 @@ export default {
   data: () => ({
     drawer: null,
     items: [
-      { icon: 'trending_up', text: 'Most Popular' },
-      { icon: 'subscriptions', text: 'Subscriptions' },
-      { icon: 'history', text: 'History' },
-      { icon: 'featured_play_list', text: 'Playlists' },
-      { icon: 'watch_later', text: 'Watch Later' }
+      { icon: 'home', text: '首页', link: '/' },
+      { icon: 'trending_up', text: '热门课程', link: '/courses' },
+      { icon: 'subscriptions', text: '热门评论', link: '/comments' }
     ],
     items2: [
       { picture: 28, text: 'Joseph' },
