@@ -164,4 +164,11 @@ nest g common
 * 同时将(server\apps\admin\src\app.module.ts)OSS存储中关键的信息也使用环境变量的方式
 * 在每个子项目main.ts中将端口号进行更改
 
+##  使用虚拟字段绑定关联关系(server\libs\db\src\models\course.model.ts)
+* 我们可以发现之前我们使用课时episode绑定归属于哪个课程course。可是我们的课程没有字段来调出有哪些课时绑定了课程。
+* 虚拟字段表示这里面的数据不在此数据表中可以查询
+* 使用Ref绑定参考于谁的数据表
+* 再使用@arrayProp，中ref表示参考的是谁。localField是本地键，表示使用了什么字段进行关联。foreignField是外键，表示那边使用了什么字段进行关联。
+* 同时要在上面模型配置中的schemaOptions配置toJSON，允许虚拟字段查出
+
 
