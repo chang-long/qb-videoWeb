@@ -6,7 +6,6 @@
       :items="course.episodes.map((v, i) => ({ text: v.name, value: i }))"
     ></v-select>
     <video width="100%" :src="episode.file" controls></video>
-    {{ episode }}
   </div>
 </template>
 
