@@ -171,4 +171,30 @@ nest g common
 * 再使用@arrayProp，中ref表示参考的是谁。localField是本地键，表示使用了什么字段进行关联。foreignField是外键，表示那边使用了什么字段进行关联。
 * 同时要在上面模型配置中的schemaOptions配置toJSON，允许虚拟字段查出
 
+##  前台注册接口的实现
+* 创建登录模块模型以及控制器
+
+```bash
+cd server
+nest g mo auth
+nest g co auth
+```
+
+* 实现注册接口(server\apps\server\src\auth\auth.controller.ts)： 使用Post方法定义接口，采用@Body将前台传入的注册信息获取，定义一个DTO数据传输对象，然后注入user数据库模型进行操作添加。值得注意的是注入模型后将用户模型使用<b>ReturnModelType</b>是typegoose中的一个泛型，指定用户模型，表名是一个用户模型类，这样就有很好的语法提示了
+
+##  前台密码进行加密处理 (bcryptjs)
+* 安装依赖
+
+```bash
+cd server
+yarn add bcryptjs
+yarn add -D @types/bcryptjs
+```
+
+* 对密码进行加密散列处理(server\libs\db\src\models\user.model.ts)：在@prop中使用set的方法，其作用是使得参数就是实际值用return 转换为某个值.值得注意的是使用set方法也有get方法.在常规获取用户中也不要把密码查出来设置<code>select: false</code>
+* 使用hashSync传入val实际值和加密指数，越大越慢
+
+##  前台登录接口的实现
+* 实现登录接口(server\apps\server\src\auth\auth.controller.ts)：
+
 
