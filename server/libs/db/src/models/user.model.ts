@@ -12,6 +12,10 @@ export class User {
   username: string
 
   @ApiProperty({ description: '密码', example: 'pass1' })
-  @prop()
+  @prop({
+    set(val){
+      return 
+    }
+  })
   password: string
 }

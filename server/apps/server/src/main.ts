@@ -8,8 +8,8 @@ async function bootstrap() {
   app.enableCors();
  
   const options = new DocumentBuilder()
-    .setTitle('Qbenben视频全栈网站-后台管理API')
-    .setDescription('供后台管理界面调用的服务端')
+    .setTitle('Qbenben视频全栈网站-前台界面使用的API')
+    .setDescription('供官网和APP调用的服务端API')
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, options);
