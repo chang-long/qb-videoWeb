@@ -191,10 +191,10 @@ yarn add bcryptjs
 yarn add -D @types/bcryptjs
 ```
 
-* 对密码进行加密散列处理(server\libs\db\src\models\user.model.ts)：在@prop中使用set的方法，其作用是使得参数就是实际值用return 转换为某个值.值得注意的是使用set方法也有get方法.在常规获取用户中也不要把密码查出来设置<code>select: false</code>
+* 对密码进行加密散列处理(server\libs\db\src\models\user.model.ts)：在@prop中使用set的方法，其作用是使得参数就是实际值用return 转换为某个值.值得注意的是使用set方法也有get方法.在常规获取用户中也不要把密码查出来的设置<code>select: false</code>
 * 使用hashSync传入val实际值和加密指数，越大越慢
 
-##  前台登录接口的实现
+##  基于Passport策略的前台登录接口的实现
 * 实现登录接口(server\apps\server\src\auth\auth.controller.ts)：
 
 
