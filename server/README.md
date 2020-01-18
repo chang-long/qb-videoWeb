@@ -194,7 +194,21 @@ yarn add -D @types/bcryptjs
 * 对密码进行加密散列处理(server\libs\db\src\models\user.model.ts)：在@prop中使用set的方法，其作用是使得参数就是实际值用return 转换为某个值.值得注意的是使用set方法也有get方法.在常规获取用户中也不要把密码查出来的设置<code>select: false</code>
 * 使用hashSync传入val实际值和加密指数，越大越慢
 
-##  基于Passport策略的前台登录接口的实现
-* 实现登录接口(server\apps\server\src\auth\auth.controller.ts)：
+##  基于Passport策略的前台登录接口的实现(server\apps\server\src\auth\local.strategy.ts)
+* 安装依赖：<br>
+
+```bash
+yarn add @nestjs/passport passport passport-local passport-jwt
+yarn add -D @types/passport @types/passport-jwt @types/passport-local
+```
+
+* 导出一个LocalStrategy类，里面写我们整个登录的逻辑,该类继承passport的策略并采用本地策略，其中第二个参数是该策略的别名。利用构造函数绑定账户和密码分别是什么字段，然后写出验证的逻辑在validate函数中。
+* 其中我们需要用户模型，这个时候就可以在构造函数中注入一个用户模型。查找用户名如果用户名不存在，则抛出异常.
+* 验证密码，因为我们是使用bcryptjs来散列加密的，如果要验证就需要导入compareSync方法。同时我们之前将密码进行select: false默认不被查，所以也需要用select方法进行调用出来
+* 写完策略后要在(server\apps\server\src\auth\auth.controller.ts)中先导入AuthGuard，在接口处使用UseGuard并指定策略由别名决定的.
+*  策略的执行会在接口逻辑之前，并返回req对象，我们只需要在req对象中取出user并返回给客户端即可完成接口操作。
+* 将接口描述数据对象抽离到Dto文件中(server\apps\server\src\auth\dto\login.dto.ts)(server\apps\server\src\auth\dto\register.dto.ts)
+* 注册模块PassportModule：(server\apps\server\src\auth\auth.module.ts)并且将我们的策略放到providers中
+* 返回jwt，这里我们使用nest的包<code>yarn add @nestjs/jwt</code>，因为JWT在前台和后台的登录都需要jwt所以我们在全局common(server\libs\common\src\common.module.ts)中注册
 
 
