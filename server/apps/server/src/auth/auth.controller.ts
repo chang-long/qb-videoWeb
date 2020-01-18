@@ -1,23 +1,19 @@
-import { Controller, Post, Body, Get } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiProperty } from '@nestjs/swagger';
+import { Controller, Post, Body, Get, UseGuards, Req } from '@nestjs/common';
+import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { InjectModel } from 'nestjs-typegoose';
 import { User } from '@libs/db/models/user.model';
 import { ReturnModelType } from '@typegoose/typegoose';
-
-export class RegisterDto {
-  @ApiProperty()
-  username: string;
-
-  @ApiProperty()
-  password: string;
-}
+import { AuthGuard } from '@nestjs/passport';
+import { RegisterDto } from './dto/register.dto';
+import { LoginDto } from './dto/login.dto';
+import { JwtService } from '@nestjs/jwt';
 
 // tslint:disable-next-line: max-classes-per-file
 @Controller('auth')
 @ApiTags('用户')
 export class AuthController {
-
   constructor(
+    private jwtService: JwtService,
     @InjectModel(User) private userModel: ReturnModelType<typeof User>,
   ) {}
 
@@ -34,8 +30,11 @@ export class AuthController {
 
   @Post('login')
   @ApiOperation({ summary: '用户登录' })
-  async login(@Body() dto) {
-    return dto;
+  @UseGuards(AuthGuard('local'))
+  async login(@Body() dto: LoginDto, @Req() req) {
+    return {
+      token: this.jwtService.sign(String(req.user._id)),
+    };
   }
 
   @Get('user')
