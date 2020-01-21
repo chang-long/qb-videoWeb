@@ -211,4 +211,14 @@ yarn add -D @types/passport @types/passport-jwt @types/passport-local
 * 注册模块PassportModule：(server\apps\server\src\auth\auth.module.ts)并且将我们的策略放到providers中
 * 返回jwt，这里我们使用nest的包<code>yarn add @nestjs/jwt</code>，因为JWT在前台和后台的登录都需要jwt所以我们在全局common(server\libs\common\src\common.module.ts)中注册
 
+##  使用JWT策略完成带有JWT的查询用户信息接口的实现
+* 1.将token取出来：在passport-jwt中的ExtractJwt里面有很多方法可以取出token，有从头部取，又从BearerToken中取。我们使用BearerToken，将值附给jwtFromRequest
+* 2.将token解密找到用户：解密同时也需要密钥，将密钥赋给secretOrKey
+* 最后的解密值就是id，会作为参数传递在validate函数中。
+* 在auth.module.ts中将策略写入
+* 在auth.controller.ts中在需要使用到策略的地方加上<code>@UseGuards(AuthGuard('jwt'))</code>。如果找到用户，用户的信息会附在req对象中
+* 最后再接口上加上@ApiBearerAuth(),表示在接口文档，这个接口需要传递token
+
+
+
 
