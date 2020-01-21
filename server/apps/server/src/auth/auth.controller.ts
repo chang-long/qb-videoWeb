@@ -1,5 +1,5 @@
 import { Controller, Post, Body, Get, UseGuards, Req } from '@nestjs/common';
-import { ApiTags, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 import { InjectModel } from 'nestjs-typegoose';
 import { User } from '@libs/db/models/user.model';
 import { ReturnModelType } from '@typegoose/typegoose';
@@ -39,7 +39,9 @@ export class AuthController {
 
   @Get('user')
   @ApiOperation({ summary: '获取个人信息' })
-  async user() {
-    return {};
+  @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
+  async user(@Req() req) {
+    return req.user;
   }
 }

@@ -1,4 +1,4 @@
-import { Strategy, StrategyOptions } from 'passport-jwt';
+import { Strategy, StrategyOptions, ExtractJwt } from 'passport-jwt';
 import { PassportStrategy } from '@nestjs/passport';
 import { InjectModel } from 'nestjs-typegoose';
 import { ReturnModelType } from '@typegoose/typegoose';
@@ -11,11 +11,12 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     @InjectModel(User) private userModel: ReturnModelType<typeof User>,
   ) {
     super({
-      
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      secretOrKey: process.env.SECRET,
     } as StrategyOptions);
   }
   // 如何验证，如何执行策略
-  async validate() {
-    
+  async validate(id) {
+    return await this.userModel.findById(id);
   }
 }
