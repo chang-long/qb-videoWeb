@@ -219,6 +219,9 @@ yarn add -D @types/passport @types/passport-jwt @types/passport-local
 * 在auth.controller.ts中在需要使用到策略的地方加上<code>@UseGuards(AuthGuard('jwt'))</code>。如果找到用户，用户的信息会附在req对象中
 * 最后再接口上加上@ApiBearerAuth(),表示在接口文档，这个接口需要传递token
 
+##  手写一个装饰器CurrentUser
+* 上面的两个策略我们在使用接口的时候能发现我们的user在写接口的时候是不方便的，要从Req从取出，所以我们可以自己写一个装饰器，到时候就可以使用@CurrentUser取出User(server\apps\server\src\auth\current-user.decorator.ts)
+* 在nest中写装饰器，使用createParamDecorator
 
 
 
