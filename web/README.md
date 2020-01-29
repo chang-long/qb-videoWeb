@@ -35,5 +35,12 @@ $ yarn start
 * 需要注意的是与传统的服务端渲染不同的是，传统服务端渲染跳转到其他页会重新全部请求刷新页面，他其实与单页的Vue一样。
 * 在获取数据的时候，由于我们需要使用到后端的查询虚拟字段，请求带参：query带入populate需要让后端关联查谁。
 
+##  使用@nuxtjs/auth模块实现Nuxt登录
+* 在以前做登录功能的时候我们传递表单对象给后台接口，成功后接口返回token，并且将token存储在localstorage中并且在后续请求中带上token，而在nuxt中有更简单的方法：
+* 安装：yarn add @nuxt/auth
+* 在web\nuxt.config.js中配置一下，首先在modules中引入。然后插件引入建立一个auth插件配置项在其中使用相对应的策略。
+* 在登录调用方法中使用$auth的loginWith方法，第一个参数代表使用什么策略，第二个参数传递对应的数据。然后nuxt会使用策略的login接口传递过去，所以nuxt作为中间层进行转发  
+* 值得注意的是由于我们要使用到全局Vuex所以我们需要在store文件下创建一个index.js
+
 
 
